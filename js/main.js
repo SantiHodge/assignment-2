@@ -1,9 +1,4 @@
-const data = [
-    {campus: "UT KNOXVILLE", enrollment: 29460, color: '#fd8105' },
-    {campus: "UT CHATTANOOGA", enrollment:11590, color:'#ecaa1f'},
-    {campus: "MARTIN", enrollment: 7280, color: '#0e223f'},
-    {campus: "HEALTH SCIENCE CENTER", enrollment: 2815, color: '#036646'}
-];
+
 
 d3.csv('Clinical Unit Costs-1.csv')
     .then(data => {
@@ -18,10 +13,10 @@ d3.csv('Clinical Unit Costs-1.csv')
     });
 
 function showBarChart(data) {
-    const margin = {top: 5, right: 5, bottom: 20, left: 50};
+    const margin = {top: 15, right: 50, bottom: 20, left: 200};
 
-    const width = 500 - margin.left - margin.right,
-        height = 140 - margin.top - margin.bottom;
+    const width = 500,
+        height = 450;
 
     const svg = d3.select('#chart').append('svg')
         .attr('width', width + margin.left + margin.right)
@@ -36,7 +31,6 @@ function showBarChart(data) {
     const yScale = d3.scaleBand()
         .domain(data.map(d => d.campus))
         .range([0, height])
-        .paddingInner(0.15);
 
     const xAxis = d3.axisBottom(xScale)
         .ticks(6)
@@ -59,8 +53,8 @@ function showBarChart(data) {
         .enter()
         .append('rect')
         .attr('class', 'bar')
-        .attr('width', d => xScale(d.sales))
+        .attr('width', d => xScale(d.enrollment))
         .attr('height', yScale.bandwidth())
-        .attr('y', d => yScale(d.month))
+        .attr('y', d => yScale(d.campus))
         .attr('x', 0);
 }
