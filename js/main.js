@@ -54,7 +54,8 @@ function showBarChart(data) {
         .append('rect')
         .attr('class', 'bar')
         .attr('width', d => xScale(d.enrollment))
-        .attr('height', yScale.bandwidth())
+        .attr('height', 100)
+        .attr('fill', d => d.color)
         .attr('y', d => yScale(d.campus))
         .attr('x', 0);
 }
